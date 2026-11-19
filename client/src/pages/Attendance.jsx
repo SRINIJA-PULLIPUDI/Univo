@@ -8,8 +8,8 @@ export default function Attendance() {
   const { user, setUser } = useAuth();
   const [syncing, setSyncing] = useState(false);
   const [showSyncModal, setShowSyncModal] = useState(false);
-  const [rollNumber, setRollNumber] = useState(user.rollNumber || "23MH1A05O3");
-  const [password, setPassword] = useState("Sri12@acoe");
+  const [rollNumber, setRollNumber] = useState(user.rollNumber || "");
+  const [password, setPassword] = useState("");
   const [campus, setCampus] = useState("ACET");
   const [syncMsg, setSyncMsg] = useState("");
   const [syncError, setSyncError] = useState("");

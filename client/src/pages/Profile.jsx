@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BookOpen, GraduationCap, Pencil, Save, Trophy, X, KeyRound, RefreshCw, CheckCircle2, ShieldCheck } from "lucide-react";
 import api from "../api/axios";
 import { useAuth } from "../context/AuthContext";
@@ -7,6 +8,7 @@ import { getPortalTheme } from "../utils/portalThemes";
 
 export default function Profile() {
   const { user, setUser } = useAuth();
+  const navigate = useNavigate();
   const theme = getPortalTheme(user.role);
 
   // Profile edit
@@ -84,23 +86,8 @@ export default function Profile() {
     }
   }
 
-  async function handleSyncSandy() {
-    setSyncingSandy(true);
-    setSandyError("");
-    setSandyMsg("");
-    try {
-      const res = await api.post("/users/sync-sandy-attendance", {
-        rollNumber: user.rollNumber || "23MH1A05O3",
-        password: "Sri12@acoe",
-        campus: "ACET",
-      });
-      setUser(res.data.user);
-      setSandyMsg("Live attendance and CGPA synchronized from Sandy portal!");
-    } catch (err) {
-      setSandyError(err.response?.data?.message || "Could not sync with Sandy attendance portal.");
-    } finally {
-      setSyncingSandy(false);
-    }
+  function handleSyncSandy() {
+    navigate("/app/attendance");
   }
 
   return (
@@ -247,11 +234,10 @@ export default function Profile() {
                 <button
                   type="button"
                   onClick={handleSyncSandy}
-                  disabled={syncingSandy}
                   className="btn-secondary !py-1.5 !text-xs flex items-center gap-2 text-violet-700 border-violet-200 hover:bg-violet-50"
                 >
-                  <RefreshCw size={13} className={syncingSandy ? "animate-spin" : ""} />
-                  {syncingSandy ? "Syncing..." : "Sync Portal"}
+                  <RefreshCw size={13} />
+                  Sync Attendance
                 </button>
               </div>
 

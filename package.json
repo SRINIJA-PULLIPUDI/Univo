@@ -1,0 +1,12 @@
+{
+  "name": "univo",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install --prefix server && npm install --prefix client",
+    "seed": "npm run seed --prefix server",
+    "bootstrap:admin": "npm run bootstrap:admin --prefix server",
+    "free:port": "npm run free:port --prefix server",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client"
+  }
+}
